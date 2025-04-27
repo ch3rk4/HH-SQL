@@ -31,7 +31,6 @@ project_root/
 │   ├── test_main.py
 │   └── test_config.py
 ├── main.py            # Основной скрипт
-├── main_test.py       # Точка входа для запуска всех тестов
 ├── .env.example       # Пример конфигурации .env файла
 ├── .gitignore         # Список игнорируемых файлов для Git
 └── requirements.txt   # Зависимости проекта
