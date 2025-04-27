@@ -4,15 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc81b20e-6d47-434f-87bc-d9a42956e812" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/HH-SQL.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+    <list default="true" id="dc81b20e-6d47-434f-87bc-d9a42956e812" name="Changes" comment="fix README.md">
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/db_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_db_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_db_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_interface.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +30,25 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="develop" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "ch3rk4"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ch3rk4/HH-SQL.git",
+    "accountId": "6f96d88e-1535-4788-810a-49b80da077ca"
+  }
+}]]></component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 3
 }]]></component>
@@ -40,10 +60,101 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python tests.Python tests for test_api.TestHeadHunterAPI.executor": "Run",
+    "Python tests.Python tests for test_database.TestDatabase.executor": "Run",
+    "Python tests.Python tests for test_db_manager.TestDBManager.executor": "Run",
+    "Python tests.Python tests for test_interface.TestInterface.executor": "Run",
+    "Python tests.Python tests for test_main.TestMain.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main"
+    "git-widget-placeholder": "day__1"
   }
 }]]></component>
+  <component name="RunManager" selected="Python tests.Python tests for test_main.TestMain">
+    <configuration name="Python tests for test_api.TestHeadHunterAPI" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="HH-SQL" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_api.TestHeadHunterAPI&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_database.TestDatabase" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="HH-SQL" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_database.TestDatabase&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_db_manager.TestDBManager" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="HH-SQL" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_db_manager.TestDBManager&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_interface.TestInterface" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="HH-SQL" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_interface.TestInterface&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_main.TestMain" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="HH-SQL" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_main.TestMain&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.Python tests for test_main.TestMain" />
+        <item itemvalue="Python tests.Python tests for test_interface.TestInterface" />
+        <item itemvalue="Python tests.Python tests for test_db_manager.TestDBManager" />
+        <item itemvalue="Python tests.Python tests for test_database.TestDatabase" />
+        <item itemvalue="Python tests.Python tests for test_api.TestHeadHunterAPI" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -60,6 +171,103 @@
       <option name="presentableId" value="Default" />
       <updated>1745769338943</updated>
     </task>
+    <task id="LOCAL-00001" summary="base for work">
+      <option name="closed" value="true" />
+      <created>1745771198333</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1745771198334</updated>
+    </task>
+    <task id="LOCAL-00002" summary="gitignore">
+      <option name="closed" value="true" />
+      <created>1745771884843</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1745771884843</updated>
+    </task>
+    <task id="LOCAL-00003" summary="base for work 2">
+      <option name="closed" value="true" />
+      <created>1745773156587</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1745773156587</updated>
+    </task>
+    <task id="LOCAL-00004" summary="write api.py and tests">
+      <option name="closed" value="true" />
+      <created>1745773400255</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1745773400255</updated>
+    </task>
+    <task id="LOCAL-00005" summary="write database.py and tests">
+      <option name="closed" value="true" />
+      <created>1745774821297</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1745774821297</updated>
+    </task>
+    <task id="LOCAL-00006" summary="write db_manage.py and tests">
+      <option name="closed" value="true" />
+      <created>1745775650388</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1745775650388</updated>
+    </task>
+    <task id="LOCAL-00007" summary="write interface.py and tests">
+      <option name="closed" value="true" />
+      <created>1745776295952</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1745776295953</updated>
+    </task>
+    <task id="LOCAL-00008" summary="write main.py and tests">
+      <option name="closed" value="true" />
+      <created>1745776870405</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1745776870405</updated>
+    </task>
+    <task id="LOCAL-00009" summary="write README.md">
+      <option name="closed" value="true" />
+      <created>1745777422559</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1745777422559</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fix README.md">
+      <option name="closed" value="true" />
+      <created>1745777452422</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1745777452422</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="base for work" />
+    <MESSAGE value="gitignore" />
+    <MESSAGE value="base for work 2" />
+    <MESSAGE value="write api.py and tests" />
+    <MESSAGE value="write database.py and tests" />
+    <MESSAGE value="write db_manage.py and tests" />
+    <MESSAGE value="write interface.py and tests" />
+    <MESSAGE value="write main.py and tests" />
+    <MESSAGE value="write README.md" />
+    <MESSAGE value="fix README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix README.md" />
   </component>
 </project>
