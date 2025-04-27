@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc81b20e-6d47-434f-87bc-d9a42956e812" name="Changes" comment="write api.py and tests">
+    <list default="true" id="dc81b20e-6d47-434f-87bc-d9a42956e812" name="Changes" comment="write database.py and tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/db_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_db_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_db_manager.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,11 +54,12 @@
   "keyToString": {
     "Python tests.Python tests for test_api.TestHeadHunterAPI.executor": "Run",
     "Python tests.Python tests for test_database.TestDatabase.executor": "Run",
+    "Python tests.Python tests for test_db_manager.TestDBManager.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "day__1"
   }
 }]]></component>
-  <component name="RunManager" selected="Python tests.Python tests for test_database.TestDatabase">
+  <component name="RunManager" selected="Python tests.Python tests for test_db_manager.TestDBManager">
     <configuration name="Python tests for test_api.TestHeadHunterAPI" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="HH-SQL" />
       <option name="ENV_FILES" value="" />
@@ -90,8 +90,24 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="Python tests for test_db_manager.TestDBManager" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="HH-SQL" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_db_manager.TestDBManager&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Python tests for test_db_manager.TestDBManager" />
         <item itemvalue="Python tests.Python tests for test_database.TestDatabase" />
         <item itemvalue="Python tests.Python tests for test_api.TestHeadHunterAPI" />
       </list>
@@ -145,7 +161,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745773400255</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="write database.py and tests">
+      <option name="closed" value="true" />
+      <created>1745774821297</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1745774821297</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -156,6 +180,7 @@
     <MESSAGE value="gitignore" />
     <MESSAGE value="base for work 2" />
     <MESSAGE value="write api.py and tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="write api.py and tests" />
+    <MESSAGE value="write database.py and tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="write database.py and tests" />
   </component>
 </project>
