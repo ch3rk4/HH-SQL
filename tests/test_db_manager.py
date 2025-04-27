@@ -1,11 +1,12 @@
 """
 Модуль для тестирования класса DBManager.
 """
+
 import unittest
-from unittest.mock import patch, MagicMock, call
-import psycopg2
+from unittest.mock import MagicMock, patch
+
+from src.config import DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER
 from src.db_manager import DBManager
-from src.config import DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT
 
 
 class TestDBManager(unittest.TestCase):
@@ -21,7 +22,7 @@ class TestDBManager(unittest.TestCase):
 
         self.test_companies_vacancies_count = [
             {"company_name": "Company 1", "vacancy_count": 5},
-            {"company_name": "Company 2", "vacancy_count": 3}
+            {"company_name": "Company 2", "vacancy_count": 3},
         ]
 
         self.test_all_vacancies = [
@@ -29,20 +30,20 @@ class TestDBManager(unittest.TestCase):
                 "company_name": "Company 1",
                 "vacancy_name": "Python Developer",
                 "salary": "100000 - 150000 ₽",
-                "url": "https://hh.ru/vacancy/v1"
+                "url": "https://hh.ru/vacancy/v1",
             },
             {
                 "company_name": "Company 2",
                 "vacancy_name": "JavaScript Developer",
                 "salary": "от 120000 ₽",
-                "url": "https://hh.ru/vacancy/v2"
-            }
+                "url": "https://hh.ru/vacancy/v2",
+            },
         ]
 
         self.test_avg_salary = {
             "avg_min_salary": 110000,
             "avg_max_salary": 160000,
-            "avg_overall": 135000
+            "avg_overall": 135000,
         }
 
         self.test_higher_salary_vacancies = [
@@ -50,7 +51,7 @@ class TestDBManager(unittest.TestCase):
                 "company_name": "Company 1",
                 "vacancy_name": "Senior Python Developer",
                 "salary": "150000 - 200000 ₽",
-                "url": "https://hh.ru/vacancy/v3"
+                "url": "https://hh.ru/vacancy/v3",
             }
         ]
 
@@ -59,11 +60,11 @@ class TestDBManager(unittest.TestCase):
                 "company_name": "Company 1",
                 "vacancy_name": "Python Developer",
                 "salary": "100000 - 150000 ₽",
-                "url": "https://hh.ru/vacancy/v1"
+                "url": "https://hh.ru/vacancy/v1",
             }
         ]
 
-    @patch('psycopg2.connect')
+    @patch("psycopg2.connect")
     def test_connect(self, mock_connect):
         """
         Тестирование метода _connect.
@@ -80,10 +81,10 @@ class TestDBManager(unittest.TestCase):
             user=DB_USER,
             password=DB_PASSWORD,
             host=DB_HOST,
-            port=DB_PORT
+            port=DB_PORT,
         )
 
-    @patch('src.db_manager.DBManager._connect')
+    @patch("src.db_manager.DBManager._connect")
     def test_get_companies_and_vacancies_count(self, mock_connect):
         """
         Тестирование метода get_companies_and_vacancies_count.
@@ -93,10 +94,7 @@ class TestDBManager(unittest.TestCase):
         mock_connect.return_value = mock_conn
         mock_conn.cursor.return_value.__enter__.return_value = mock_cursor
 
-        mock_cursor.fetchall.return_value = [
-            ("Company 1", 5),
-            ("Company 2", 3)
-        ]
+        mock_cursor.fetchall.return_value = [("Company 1", 5), ("Company 2", 3)]
 
         result = self.db_manager.get_companies_and_vacancies_count()
 
@@ -112,7 +110,7 @@ class TestDBManager(unittest.TestCase):
         mock_cursor.fetchall.assert_called_once()
         mock_conn.close.assert_called_once()
 
-    @patch('src.db_manager.DBManager._connect')
+    @patch("src.db_manager.DBManager._connect")
     def test_get_all_vacancies(self, mock_connect):
         """
         Тестирование метода get_all_vacancies.
@@ -123,8 +121,22 @@ class TestDBManager(unittest.TestCase):
         mock_conn.cursor.return_value.__enter__.return_value = mock_cursor
 
         mock_cursor.fetchall.return_value = [
-            ("Company 1", "Python Developer", 100000, 150000, "RUB", "https://hh.ru/vacancy/v1"),
-            ("Company 2", "JavaScript Developer", 120000, None, "RUB", "https://hh.ru/vacancy/v2")
+            (
+                "Company 1",
+                "Python Developer",
+                100000,
+                150000,
+                "RUB",
+                "https://hh.ru/vacancy/v1",
+            ),
+            (
+                "Company 2",
+                "JavaScript Developer",
+                120000,
+                None,
+                "RUB",
+                "https://hh.ru/vacancy/v2",
+            ),
         ]
 
         result = self.db_manager.get_all_vacancies()
@@ -146,7 +158,7 @@ class TestDBManager(unittest.TestCase):
         mock_cursor.fetchall.assert_called_once()
         mock_conn.close.assert_called_once()
 
-    @patch('src.db_manager.DBManager._connect')
+    @patch("src.db_manager.DBManager._connect")
     def test_get_avg_salary(self, mock_connect):
         """
         Тестирование метода get_avg_salary.
@@ -169,8 +181,8 @@ class TestDBManager(unittest.TestCase):
         self.assertEqual(mock_cursor.fetchone.call_count, 3)
         mock_conn.close.assert_called_once()
 
-    @patch('src.db_manager.DBManager.get_avg_salary')
-    @patch('src.db_manager.DBManager._connect')
+    @patch("src.db_manager.DBManager.get_avg_salary")
+    @patch("src.db_manager.DBManager._connect")
     def test_get_vacancies_with_higher_salary(self, mock_connect, mock_get_avg_salary):
         """
         Тестирование метода get_vacancies_with_higher_salary.
@@ -183,7 +195,14 @@ class TestDBManager(unittest.TestCase):
         mock_get_avg_salary.return_value = self.test_avg_salary
 
         mock_cursor.fetchall.return_value = [
-            ("Company 1", "Senior Python Developer", 150000, 200000, "RUB", "https://hh.ru/vacancy/v3")
+            (
+                "Company 1",
+                "Senior Python Developer",
+                150000,
+                200000,
+                "RUB",
+                "https://hh.ru/vacancy/v3",
+            )
         ]
 
         result = self.db_manager.get_vacancies_with_higher_salary()
@@ -201,7 +220,7 @@ class TestDBManager(unittest.TestCase):
         mock_cursor.fetchall.assert_called_once()
         mock_conn.close.assert_called_once()
 
-    @patch('src.db_manager.DBManager._connect')
+    @patch("src.db_manager.DBManager._connect")
     def test_get_vacancies_with_keyword(self, mock_connect):
         """
         Тестирование метода get_vacancies_with_keyword.
@@ -212,7 +231,14 @@ class TestDBManager(unittest.TestCase):
         mock_conn.cursor.return_value.__enter__.return_value = mock_cursor
 
         mock_cursor.fetchall.return_value = [
-            ("Company 1", "Python Developer", 100000, 150000, "RUB", "https://hh.ru/vacancy/v1")
+            (
+                "Company 1",
+                "Python Developer",
+                100000,
+                150000,
+                "RUB",
+                "https://hh.ru/vacancy/v1",
+            )
         ]
 
         result = self.db_manager.get_vacancies_with_keyword("Python")

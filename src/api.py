@@ -2,10 +2,13 @@
 Модуль для взаимодействия с API HeadHunter.
 Предоставляет классы и функции для получения данных о работодателях и вакансиях.
 """
-import requests
-from typing import Dict, List, Optional, Any, Union
+
 import time
-from src.config import HH_API_BASE_URL, COMPANY_IDS, API_HEADERS
+from typing import Any, Dict, List, Optional, Union
+
+import requests
+
+from src.config import API_HEADERS, COMPANY_IDS, HH_API_BASE_URL
 
 
 class HeadHunterAPI:
@@ -13,14 +16,18 @@ class HeadHunterAPI:
     Класс для взаимодействия с API HeadHunter.
     """
 
-    def __init__(self, base_url: str = HH_API_BASE_URL, headers: Dict[str, str] = API_HEADERS):
+    def __init__(
+        self, base_url: str = HH_API_BASE_URL, headers: Dict[str, str] = API_HEADERS
+    ):
         """
         Инициализация класса HeadHunterAPI с базовым URL и заголовками.
         """
         self.base_url = base_url
         self.headers = headers
 
-    def _make_request(self, endpoint: str, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    def _make_request(
+        self, endpoint: str, params: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
         """
         Выполнение запроса к API HeadHunter.
         """
@@ -42,16 +49,14 @@ class HeadHunterAPI:
         endpoint = f"employers/{employer_id}"
         return self._make_request(endpoint)
 
-    def get_employer_vacancies(self, employer_id: str, page: int = 0, per_page: int = 100) -> Dict[str, Any]:
+    def get_employer_vacancies(
+        self, employer_id: str, page: int = 0, per_page: int = 100
+    ) -> Dict[str, Any]:
         """
         Получение вакансий для конкретного работодателя.
         """
         endpoint = "vacancies"
-        params = {
-            "employer_id": employer_id,
-            "page": page,
-            "per_page": per_page
-        }
+        params = {"employer_id": employer_id, "page": page, "per_page": per_page}
         return self._make_request(endpoint, params)
 
     def get_all_employer_vacancies(self, employer_id: str) -> List[Dict[str, Any]]:
@@ -75,8 +80,9 @@ class HeadHunterAPI:
 
         return all_vacancies
 
-    def get_companies_and_vacancies(self, company_ids: List[str] = COMPANY_IDS) -> Dict[
-        str, Dict[str, Union[Dict[str, Any], List[Dict[str, Any]]]]]:
+    def get_companies_and_vacancies(
+        self, company_ids: List[str] = COMPANY_IDS
+    ) -> Dict[str, Dict[str, Union[Dict[str, Any], List[Dict[str, Any]]]]]:
         """
         Получение информации о нескольких компаниях и их вакансиях.
         """
@@ -88,16 +94,17 @@ class HeadHunterAPI:
 
                 vacancies = self.get_all_employer_vacancies(company_id)
 
-                result[company_id] = {
-                    "company": company_info,
-                    "vacancies": vacancies
-                }
+                result[company_id] = {"company": company_info, "vacancies": vacancies}
 
                 time.sleep(0.5)
 
-                print(f"Получены данные для компании {company_info.get('name', company_id)}: {len(vacancies)} вакансий")
+                print(
+                    f"Получены данные для компании {company_info.get('name', company_id)}: {len(vacancies)} вакансий"
+                )
             except Exception as e:
-                print(f"Ошибка при получении данных для компании {company_id}: {str(e)}")
+                print(
+                    f"Ошибка при получении данных для компании {company_id}: {str(e)}"
+                )
 
         return result
 
@@ -126,11 +133,7 @@ def normalize_salary(salary_data: Optional[Dict[str, Any]]) -> Dict[str, Optiona
 
         currency = "RUB"
 
-    return {
-        "min_salary": min_salary,
-        "max_salary": max_salary,
-        "currency": currency
-    }
+    return {"min_salary": min_salary, "max_salary": max_salary, "currency": currency}
 
 
 def extract_vacancy_data(vacancy: Dict[str, Any]) -> Dict[str, Any]:
@@ -148,8 +151,16 @@ def extract_vacancy_data(vacancy: Dict[str, Any]) -> Dict[str, Any]:
         "max_salary": normalized_salary["max_salary"],
         "currency": normalized_salary["currency"],
         "published_at": vacancy.get("published_at"),
-        "requirement": vacancy.get("snippet", {}).get("requirement") if vacancy.get("snippet") else None,
-        "responsibility": vacancy.get("snippet", {}).get("responsibility") if vacancy.get("snippet") else None
+        "requirement": (
+            vacancy.get("snippet", {}).get("requirement")
+            if vacancy.get("snippet")
+            else None
+        ),
+        "responsibility": (
+            vacancy.get("snippet", {}).get("responsibility")
+            if vacancy.get("snippet")
+            else None
+        ),
     }
 
 
@@ -164,5 +175,9 @@ def extract_company_data(company: Dict[str, Any]) -> Dict[str, Any]:
         "description": company.get("description"),
         "area": company.get("area", {}).get("name") if company.get("area") else None,
         "site_url": company.get("site_url"),
-        "industry": company.get("industries", [{}])[0].get("name") if company.get("industries") else None
+        "industry": (
+            company.get("industries", [{}])[0].get("name")
+            if company.get("industries")
+            else None
+        ),
     }

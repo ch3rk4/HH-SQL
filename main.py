@@ -2,11 +2,14 @@
 Основная точка входа в приложение.
 Обрабатывает инициализацию, получение данных и пользовательский интерфейс.
 """
+
 import time
+
 from src.api import HeadHunterAPI, extract_company_data, extract_vacancy_data
-from src.database import create_database, create_tables, save_employers_to_db, save_vacancies_to_db
-from src.interface import run_user_interface
 from src.config import COMPANY_IDS
+from src.database import (create_database, create_tables, save_employers_to_db,
+                          save_vacancies_to_db)
+from src.interface import run_user_interface
 
 
 def init_database() -> None:
@@ -46,7 +49,9 @@ def fetch_and_save_data() -> None:
     save_employers_to_db(employers)
     save_vacancies_to_db(vacancies)
 
-    print(f"\nДанные сохранены: {len(employers)} работодателей и {len(vacancies)} вакансий")
+    print(
+        f"\nДанные сохранены: {len(employers)} работодателей и {len(vacancies)} вакансий"
+    )
 
 
 def main() -> None:

@@ -1,15 +1,16 @@
 """
 Модуль для тестирования основного скрипта main.py.
 """
-import unittest
-from unittest.mock import patch, MagicMock, call
-import sys
+
 import io
 import os
+import sys
+import unittest
+from unittest.mock import MagicMock, patch
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from main import init_database, fetch_and_save_data, main
+from main import fetch_and_save_data, init_database, main
 
 
 class TestMain(unittest.TestCase):
@@ -17,8 +18,8 @@ class TestMain(unittest.TestCase):
     Класс для тестирования функциональности основного скрипта.
     """
 
-    @patch('main.create_tables')
-    @patch('main.create_database')
+    @patch("main.create_tables")
+    @patch("main.create_database")
     def test_init_database(self, mock_create_database, mock_create_tables):
         """
         Тестирование функции init_database.
@@ -36,10 +37,12 @@ class TestMain(unittest.TestCase):
         output = captured_output.getvalue()
         self.assertIn("Инициализация базы данных...", output)
 
-    @patch('main.save_vacancies_to_db')
-    @patch('main.save_employers_to_db')
-    @patch('main.HeadHunterAPI')
-    def test_fetch_and_save_data(self, mock_hh_api_class, mock_save_employers, mock_save_vacancies):
+    @patch("main.save_vacancies_to_db")
+    @patch("main.save_employers_to_db")
+    @patch("main.HeadHunterAPI")
+    def test_fetch_and_save_data(
+        self, mock_hh_api_class, mock_save_employers, mock_save_vacancies
+    ):
         """
         Тестирование функции fetch_and_save_data.
         """
@@ -55,7 +58,7 @@ class TestMain(unittest.TestCase):
                     "description": "Test description",
                     "area": {"name": "Moscow"},
                     "site_url": "https://testcompany.com",
-                    "industries": [{"name": "IT"}]
+                    "industries": [{"name": "IT"}],
                 },
                 "vacancies": [
                     {
@@ -63,18 +66,14 @@ class TestMain(unittest.TestCase):
                         "name": "Python Developer",
                         "area": {"name": "Moscow"},
                         "alternate_url": "https://hh.ru/vacancy/v1",
-                        "salary": {
-                            "from": 100000,
-                            "to": 150000,
-                            "currency": "RUB"
-                        },
+                        "salary": {"from": 100000, "to": 150000, "currency": "RUB"},
                         "published_at": "2023-01-01T12:00:00+0300",
                         "snippet": {
                             "requirement": "Python, Django",
-                            "responsibility": "Development"
-                        }
+                            "responsibility": "Development",
+                        },
                     }
-                ]
+                ],
             }
         }
 
@@ -97,11 +96,17 @@ class TestMain(unittest.TestCase):
         self.assertIn("Сохранение данных в базу данных...", output)
         self.assertIn("Данные сохранены:", output)
 
-    @patch('main.run_user_interface')
-    @patch('main.fetch_and_save_data')
-    @patch('main.init_database')
-    @patch('time.sleep')
-    def test_main(self, mock_sleep, mock_init_database, mock_fetch_and_save_data, mock_run_user_interface):
+    @patch("main.run_user_interface")
+    @patch("main.fetch_and_save_data")
+    @patch("main.init_database")
+    @patch("time.sleep")
+    def test_main(
+        self,
+        mock_sleep,
+        mock_init_database,
+        mock_fetch_and_save_data,
+        mock_run_user_interface,
+    ):
         """
         Тестирование функции main.
         """

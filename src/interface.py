@@ -2,7 +2,9 @@
 Модуль для функциональности пользовательского интерфейса.
 Предоставляет интерфейс командной строки для взаимодействия с приложением.
 """
-from typing import List, Dict, Any, Optional
+
+from typing import Any, Dict, List
+
 from src.db_manager import DBManager
 
 

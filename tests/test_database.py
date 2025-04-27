@@ -1,9 +1,12 @@
 """
 Модуль для тестирования функций работы с базой данных.
 """
+
 import unittest
-from unittest.mock import patch, MagicMock, call
-from src.database import create_database, create_tables, save_employers_to_db, save_vacancies_to_db, connect_to_db
+from unittest.mock import MagicMock, call, patch
+
+from src.database import (connect_to_db, create_database, create_tables,
+                          save_employers_to_db, save_vacancies_to_db)
 
 
 class TestDatabase(unittest.TestCase):
@@ -23,7 +26,7 @@ class TestDatabase(unittest.TestCase):
                 "description": "Test description 1",
                 "area": "Moscow",
                 "site_url": "https://testcompany1.com",
-                "industry": "IT"
+                "industry": "IT",
             },
             {
                 "id": "5678",
@@ -32,8 +35,8 @@ class TestDatabase(unittest.TestCase):
                 "description": "Test description 2",
                 "area": "Saint Petersburg",
                 "site_url": "https://testcompany2.com",
-                "industry": "Finance"
-            }
+                "industry": "Finance",
+            },
         ]
 
         self.test_vacancies = [
@@ -48,7 +51,7 @@ class TestDatabase(unittest.TestCase):
                 "currency": "RUB",
                 "published_at": "2023-01-01T12:00:00+0300",
                 "requirement": "Python, Django",
-                "responsibility": "Development"
+                "responsibility": "Development",
             },
             {
                 "id": "v2",
@@ -61,11 +64,11 @@ class TestDatabase(unittest.TestCase):
                 "currency": "RUB",
                 "published_at": "2023-01-02T12:00:00+0300",
                 "requirement": "JavaScript, React",
-                "responsibility": "Frontend Development"
-            }
+                "responsibility": "Frontend Development",
+            },
         ]
 
-    @patch('psycopg2.connect')
+    @patch("psycopg2.connect")
     def test_create_database(self, mock_connect):
         """
         Тестирование функции create_database.
@@ -83,7 +86,10 @@ class TestDatabase(unittest.TestCase):
         mock_conn.cursor.assert_called_once()
 
         expected_calls = [
-            call("SELECT 1 FROM pg_catalog.pg_database WHERE datname = %s", ('headhunter_vacancies',)),
+            call(
+                "SELECT 1 FROM pg_catalog.pg_database WHERE datname = %s",
+                ("headhunter_vacancies",),
+            ),
         ]
 
         self.assertEqual(mock_cur.execute.call_args_list[0], expected_calls[0])
@@ -94,7 +100,7 @@ class TestDatabase(unittest.TestCase):
         mock_cur.close.assert_called_once()
         mock_conn.close.assert_called_once()
 
-    @patch('src.database.connect_to_db')
+    @patch("src.database.connect_to_db")
     def test_create_tables(self, mock_connect_to_db):
         """
         Тестирование функции create_tables.
@@ -110,7 +116,7 @@ class TestDatabase(unittest.TestCase):
         mock_cur.close.assert_called_once()
         mock_conn.close.assert_called_once()
 
-    @patch('src.database.connect_to_db')
+    @patch("src.database.connect_to_db")
     def test_save_employers_to_db(self, mock_connect_to_db):
         """
         Тестирование функции save_employers_to_db.
@@ -137,7 +143,7 @@ class TestDatabase(unittest.TestCase):
         mock_cur.close.assert_called_once()
         mock_conn.close.assert_called_once()
 
-    @patch('src.database.connect_to_db')
+    @patch("src.database.connect_to_db")
     def test_save_vacancies_to_db(self, mock_connect_to_db):
         """
         Тестирование функции save_vacancies_to_db.
@@ -149,7 +155,9 @@ class TestDatabase(unittest.TestCase):
         save_vacancies_to_db(self.test_vacancies)
 
         mock_connect_to_db.assert_called_once()
-        self.assertEqual(mock_cur.execute.call_count, 2)  # Должны быть два вызова для вставки двух записей
+        self.assertEqual(
+            mock_cur.execute.call_count, 2
+        )  # Должны быть два вызова для вставки двух записей
 
         args1, kwargs1 = mock_cur.execute.call_args_list[0]
         self.assertIn("INSERT INTO vacancies", args1[0])
@@ -166,7 +174,7 @@ class TestDatabase(unittest.TestCase):
         mock_cur.close.assert_called_once()
         mock_conn.close.assert_called_once()
 
-    @patch('psycopg2.connect')
+    @patch("psycopg2.connect")
     def test_connect_to_db(self, mock_connect):
         """
         Тестирование функции connect_to_db.
@@ -182,11 +190,11 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(cur, mock_cur)
 
         mock_connect.assert_called_once_with(
-            user='postgres',
-            password='your_password',
-            host='localhost',
-            port='5432',
-            database='headhunter_vacancies'
+            user="postgres",
+            password="your_password",
+            host="localhost",
+            port="5432",
+            database="headhunter_vacancies",
         )
         mock_conn.cursor.assert_called_once()
         self.assertTrue(mock_conn.autocommit)

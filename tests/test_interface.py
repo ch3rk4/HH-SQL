@@ -1,19 +1,16 @@
 """
 Модуль для тестирования пользовательского интерфейса.
 """
-import unittest
-from unittest.mock import patch, MagicMock, call
+
 import io
 import sys
-from src.interface import (
-    display_companies_and_vacancies,
-    display_all_vacancies,
-    display_avg_salary,
-    display_higher_salary_vacancies,
-    display_keyword_vacancies,
-    run_user_interface
-)
-from src.db_manager import DBManager
+import unittest
+from unittest.mock import MagicMock, call, patch
+
+from src.interface import (display_all_vacancies, display_avg_salary,
+                           display_companies_and_vacancies,
+                           display_higher_salary_vacancies,
+                           display_keyword_vacancies, run_user_interface)
 
 
 class TestInterface(unittest.TestCase):
@@ -27,7 +24,7 @@ class TestInterface(unittest.TestCase):
         """
         self.test_companies_vacancies_count = [
             {"company_name": "Company 1", "vacancy_count": 5},
-            {"company_name": "Company 2", "vacancy_count": 3}
+            {"company_name": "Company 2", "vacancy_count": 3},
         ]
 
         self.test_all_vacancies = [
@@ -35,20 +32,20 @@ class TestInterface(unittest.TestCase):
                 "company_name": "Company 1",
                 "vacancy_name": "Python Developer",
                 "salary": "100000 - 150000 ₽",
-                "url": "https://hh.ru/vacancy/v1"
+                "url": "https://hh.ru/vacancy/v1",
             },
             {
                 "company_name": "Company 2",
                 "vacancy_name": "JavaScript Developer",
                 "salary": "от 120000 ₽",
-                "url": "https://hh.ru/vacancy/v2"
-            }
+                "url": "https://hh.ru/vacancy/v2",
+            },
         ]
 
         self.test_avg_salary = {
             "avg_min_salary": 110000,
             "avg_max_salary": 160000,
-            "avg_overall": 135000
+            "avg_overall": 135000,
         }
 
         self.test_higher_salary_vacancies = [
@@ -56,7 +53,7 @@ class TestInterface(unittest.TestCase):
                 "company_name": "Company 1",
                 "vacancy_name": "Senior Python Developer",
                 "salary": "150000 - 200000 ₽",
-                "url": "https://hh.ru/vacancy/v3"
+                "url": "https://hh.ru/vacancy/v3",
             }
         ]
 
@@ -65,7 +62,7 @@ class TestInterface(unittest.TestCase):
                 "company_name": "Company 1",
                 "vacancy_name": "Python Developer",
                 "salary": "100000 - 150000 ₽",
-                "url": "https://hh.ru/vacancy/v1"
+                "url": "https://hh.ru/vacancy/v1",
             }
         ]
 
@@ -158,8 +155,8 @@ class TestInterface(unittest.TestCase):
         self.assertIn("Зарплата: 100000 - 150000 ₽", output)
         self.assertIn("URL: https://hh.ru/vacancy/v1", output)
 
-    @patch('builtins.input')
-    @patch('src.interface.DBManager')
+    @patch("builtins.input")
+    @patch("src.interface.DBManager")
     def test_run_user_interface(self, mock_db_manager_class, mock_input):
         """
         Тестирование функции run_user_interface.
@@ -167,11 +164,17 @@ class TestInterface(unittest.TestCase):
         mock_db_manager = MagicMock()
         mock_db_manager_class.return_value = mock_db_manager
 
-        mock_db_manager.get_companies_and_vacancies_count.return_value = self.test_companies_vacancies_count
+        mock_db_manager.get_companies_and_vacancies_count.return_value = (
+            self.test_companies_vacancies_count
+        )
         mock_db_manager.get_all_vacancies.return_value = self.test_all_vacancies
         mock_db_manager.get_avg_salary.return_value = self.test_avg_salary
-        mock_db_manager.get_vacancies_with_higher_salary.return_value = self.test_higher_salary_vacancies
-        mock_db_manager.get_vacancies_with_keyword.return_value = self.test_keyword_vacancies
+        mock_db_manager.get_vacancies_with_higher_salary.return_value = (
+            self.test_higher_salary_vacancies
+        )
+        mock_db_manager.get_vacancies_with_keyword.return_value = (
+            self.test_keyword_vacancies
+        )
 
         mock_input.side_effect = ["1", "2", "3", "4", "5", "Python", "0"]
 
@@ -190,9 +193,11 @@ class TestInterface(unittest.TestCase):
         mock_db_manager.get_vacancies_with_keyword.assert_called_once_with("Python")
 
         self.assertEqual(mock_input.call_count, 7)
-        self.assertEqual(mock_input.call_args_list[0], call('\nВыберите пункт меню: '))
-        self.assertEqual(mock_input.call_args_list[5], call('Введите ключевое слово для поиска: '))
-        self.assertEqual(mock_input.call_args_list[6], call('\nВыберите пункт меню: '))
+        self.assertEqual(mock_input.call_args_list[0], call("\nВыберите пункт меню: "))
+        self.assertEqual(
+            mock_input.call_args_list[5], call("Введите ключевое слово для поиска: ")
+        )
+        self.assertEqual(mock_input.call_args_list[6], call("\nВыберите пункт меню: "))
 
         output = captured_output.getvalue()
         self.assertIn("=== Меню ===", output)

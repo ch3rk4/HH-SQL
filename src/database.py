@@ -2,11 +2,14 @@
 Модуль для операций с базой данных.
 Отвечает за создание базы данных и таблиц.
 """
+
+from typing import Any, Dict, List, Tuple
+
 import psycopg2
 from psycopg2 import sql
 from psycopg2.extensions import connection, cursor
-from typing import  Dict, Any, List, Tuple
-from src.config import DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT
+
+from src.config import DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER
 
 
 def create_database() -> None:
@@ -18,7 +21,7 @@ def create_database() -> None:
         password=DB_PASSWORD,
         host=DB_HOST,
         port=DB_PORT,
-        database="postgres"
+        database="postgres",
     )
     conn.autocommit = True
     cur = conn.cursor()
@@ -41,11 +44,7 @@ def connect_to_db() -> Tuple[connection, cursor]:
     Подключение к базе данных проекта.
     """
     conn = psycopg2.connect(
-        user=DB_USER,
-        password=DB_PASSWORD,
-        host=DB_HOST,
-        port=DB_PORT,
-        database=DB_NAME
+        user=DB_USER, password=DB_PASSWORD, host=DB_HOST, port=DB_PORT, database=DB_NAME
     )
     conn.autocommit = True
     cur = conn.cursor()
@@ -58,7 +57,8 @@ def create_tables() -> None:
     """
     conn, cur = connect_to_db()
 
-    cur.execute("""
+    cur.execute(
+        """
     CREATE TABLE IF NOT EXISTS employers (
         id VARCHAR(50) PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
@@ -68,9 +68,11 @@ def create_tables() -> None:
         site_url VARCHAR(255),
         industry VARCHAR(255)
     )
-    """)
+    """
+    )
 
-    cur.execute("""
+    cur.execute(
+        """
     CREATE TABLE IF NOT EXISTS vacancies (
         id VARCHAR(50) PRIMARY KEY,
         employer_id VARCHAR(50) NOT NULL,
@@ -85,7 +87,8 @@ def create_tables() -> None:
         responsibility TEXT,
         FOREIGN KEY (employer_id) REFERENCES employers (id) ON DELETE CASCADE
     )
-    """)
+    """
+    )
 
     print("Таблицы успешно созданы")
 
@@ -100,7 +103,8 @@ def save_employers_to_db(employers: List[Dict[str, Any]]) -> None:
     conn, cur = connect_to_db()
 
     for employer in employers:
-        cur.execute("""
+        cur.execute(
+            """
         INSERT INTO employers (id, name, url, description, area, site_url, industry)
         VALUES (%s, %s, %s, %s, %s, %s, %s)
         ON CONFLICT (id) DO UPDATE SET
@@ -110,15 +114,17 @@ def save_employers_to_db(employers: List[Dict[str, Any]]) -> None:
             area = EXCLUDED.area,
             site_url = EXCLUDED.site_url,
             industry = EXCLUDED.industry
-        """, (
-            employer.get("id"),
-            employer.get("name"),
-            employer.get("url"),
-            employer.get("description"),
-            employer.get("area"),
-            employer.get("site_url"),
-            employer.get("industry")
-        ))
+        """,
+            (
+                employer.get("id"),
+                employer.get("name"),
+                employer.get("url"),
+                employer.get("description"),
+                employer.get("area"),
+                employer.get("site_url"),
+                employer.get("industry"),
+            ),
+        )
 
     print(f"Сохранено {len(employers)} работодателей в базу данных")
 
@@ -133,10 +139,11 @@ def save_vacancies_to_db(vacancies: List[Dict[str, Any]]) -> None:
     conn, cur = connect_to_db()
 
     for vacancy in vacancies:
-        cur.execute("""
+        cur.execute(
+            """
         INSERT INTO vacancies (
-            id, employer_id, name, area, url, 
-            min_salary, max_salary, currency, 
+            id, employer_id, name, area, url,
+            min_salary, max_salary, currency,
             published_at, requirement, responsibility
         )
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
@@ -151,19 +158,21 @@ def save_vacancies_to_db(vacancies: List[Dict[str, Any]]) -> None:
             published_at = EXCLUDED.published_at,
             requirement = EXCLUDED.requirement,
             responsibility = EXCLUDED.responsibility
-        """, (
-            vacancy.get("id"),
-            vacancy.get("employer_id"),
-            vacancy.get("name"),
-            vacancy.get("area"),
-            vacancy.get("url"),
-            vacancy.get("min_salary"),
-            vacancy.get("max_salary"),
-            vacancy.get("currency"),
-            vacancy.get("published_at"),
-            vacancy.get("requirement"),
-            vacancy.get("responsibility")
-        ))
+        """,
+            (
+                vacancy.get("id"),
+                vacancy.get("employer_id"),
+                vacancy.get("name"),
+                vacancy.get("area"),
+                vacancy.get("url"),
+                vacancy.get("min_salary"),
+                vacancy.get("max_salary"),
+                vacancy.get("currency"),
+                vacancy.get("published_at"),
+                vacancy.get("requirement"),
+                vacancy.get("responsibility"),
+            ),
+        )
 
     print(f"Сохранено {len(vacancies)} вакансий в базу данных")
 
